@@ -26,16 +26,18 @@
       <th scope="col">Price USD</th>
       <th scope="col">Price PLN</th>
       <th scope="col">Value USD</th>
+      <th scope="col">Value PLN</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
       <td>{{session['name_btc']}}</td>
-      <td>{{session['quantity_btc']}}</td>
+      <td>{{form.quantity_btc.data}}</td>
       <td>{{session['price_btc_usd']}}</td>
       <td>{{session['price_btc_pln']}}</td>
-      <td>{{session['coin_value_usd']}}</td>
+      <td>{{session['btc_value_usd']}}</td>
+      <td>{{session['btc_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">2</th>
@@ -43,6 +45,8 @@
       <td>{{session['quantity_xrp']}}</td>
       <td>{{session['price_xrp_usd']}}</td>
       <td>{{session['price_xrp_pln']}}</td>
+      <td>{{session['xrp_value_usd']}}</td>
+      <td>{{session['xrp_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">3</th>
@@ -50,6 +54,8 @@
       <td>{{session['quantity_xlm']}}</td>
       <td>{{session['price_xlm_usd']}}</td>
       <td>{{session['price_xlm_pln']}}</td>
+      <td>{{session['xlm_value_usd']}}</td>
+      <td>{{session['xlm_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">4</th>
@@ -57,6 +63,18 @@
       <td>{{session['quantity_gld']}}</td>
       <td>{{session['price_gld_usd']}}</td>
       <td>{{session['price_gld_pln']}}</td>
+      <td>{{session['gld_value_usd']}}</td>
+      <td>{{session['gld_value_pln']}}</td>
+    </tr>
+      <tr>
+      <th scope="row">5</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+      <td class="bg-danger">{{session['total_pln']}}</td>
     </tr>
   </tbody>
 </table>
