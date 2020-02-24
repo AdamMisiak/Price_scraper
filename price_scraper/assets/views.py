@@ -7,7 +7,6 @@ from price_scraper.models import Asset
 from price_scraper import app, db
 
 
-#HW - katalog zamienic na tutiorialowy flask, dodac blueprints
 
 assets_blueprint = Blueprint('assets',__name__, template_folder='templates')
 

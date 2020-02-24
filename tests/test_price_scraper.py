@@ -1,6 +1,6 @@
 import os
 import tempfile
-from Price_scraper import app, Price_scraper
+from price_scraper import app
 
 import pytest
 
