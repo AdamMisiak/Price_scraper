@@ -21,5 +21,5 @@ def client():
 
 
 def test_index(client):
-    rv = client.get('/summary')
-    assert b'No entries here so far' in rv.data
+    rv = client.get('/assets/summary')
+    assert b'This is your portfolio:' in rv.data

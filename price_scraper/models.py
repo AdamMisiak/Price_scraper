@@ -1,23 +1,30 @@
 from flask_login import UserMixin
 from price_scraper import db
+from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey
 
 
 class Asset(db.Model):
-    __tablename__ = 'assets'
+    __tablename__ = 'asset'
 
     id = db.Column(db.Integer, primary_key=True)
     quantity_btc = db.Column(db.Float)
     quantity_xrp = db.Column(db.Float)
     quantity_xlm = db.Column(db.Float)
     quantity_gld = db.Column(db.Float)
-
-    def __init__(self,quantity_btc,quantity_xrp,quantity_xlm,quantity_gld):
-        self.quantity_btc = quantity_btc
-        self.quantity_xrp = quantity_xrp
-        self.quantity_xlm = quantity_xlm
-        self.quantity_gld = quantity_gld
-
+    user_id = relationship("User", uselist=False)
 
 
     def __repr__(self):
         return f"BTC quantity= {self.quantity_btc}, XRP quantity= {self.quantity_xrp}, XLM quantity= {self.quantity_xlm}, GLD quantity= {self.quantity_gld}"
+
+class User(db.Model,UserMixin):
+    __tablename__ = 'user'
+
+    id = db.Column(db.Integer,primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    password = db.Column(db.String(255), nullable=False)
+    asset_id = db.Column(db.Integer, ForeignKey('asset.id'))
+
+
