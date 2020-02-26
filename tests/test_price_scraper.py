@@ -4,8 +4,6 @@ from price_scraper import app
 
 import pytest
 
-
-
 @pytest.fixture
 def client():
     db_fd, app.config['DATABASE'] = tempfile.mkstemp()
@@ -23,3 +21,4 @@ def client():
 def test_index(client):
     rv = client.get('/assets/summary')
     assert b'This is your portfolio:' in rv.data
+

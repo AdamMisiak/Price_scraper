@@ -6,12 +6,10 @@ from price_scraper.assets.functions import check_name_btc,check_name_xlm,check_n
 from price_scraper.models import Asset
 from price_scraper import app, db
 
-
-
 assets_blueprint = Blueprint('assets',__name__, template_folder='templates')
 
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
 
     form = CheckPriceForm()
@@ -22,7 +20,6 @@ def index():
         #
         # db.session.add(new_asset)
         # db.session.commit()
-
 
         session['quantity_btc'] = form.quantity_btc.data
         session['quantity_xrp'] = form.quantity_xrp.data
@@ -58,11 +55,10 @@ def index():
 
         session['total_pln'] = round_quantity(session['total_pln'])
 
-
-
         return redirect(url_for('assets.summary'))
 
-    return render_template('index.html',form=form)
+    return render_template('index.html', form=form)
+
 
 @assets_blueprint.route('/summary')
 def summary():

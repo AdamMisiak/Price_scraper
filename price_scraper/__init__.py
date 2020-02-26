@@ -16,5 +16,7 @@ migrate = Migrate(app,db)
 
 
 from price_scraper.assets.views import assets_blueprint
+from price_scraper.users.views import users_blueprint
 
 app.register_blueprint(assets_blueprint,url_prefix='/assets')
+app.register_blueprint(users_blueprint,url_prefix='/users')
