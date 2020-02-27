@@ -14,6 +14,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return None
+login_manager.login_view = "users.login"
+
 
 from price_scraper.assets.views import assets_blueprint
 from price_scraper.users.views import users_blueprint
