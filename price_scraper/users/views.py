@@ -10,7 +10,7 @@ users_blueprint = Blueprint('users',__name__, template_folder='templates')
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form.validate_email(form.email):
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)
@@ -33,3 +33,8 @@ def login():
 
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
+
+@users_blueprint.route('/list')
+def list_users():
+    all_users = User.query.all()
+    return render_template('list.html', all_users=all_users)

@@ -18,7 +18,20 @@ def client():
     os.unlink(app.config['DATABASE'])
 
 
+
 def test_index(client):
     rv = client.get('/assets/summary')
     assert b'This is your portfolio:' in rv.data
 
+
+def test_round_quantity():
+    assert round(5.3333) == 5.333
+
+
+def test_response(client):
+    response = client.get("/users/register")
+    assert response.status_code == 200
+
+def test_error(client):
+    response = client.get("/thereisnotthatroute")
+    assert response.status_code == 404
