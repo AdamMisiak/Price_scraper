@@ -9,8 +9,9 @@ users_blueprint = Blueprint('users',__name__, template_folder='templates')
 
 @users_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+
     form = RegistrationForm()
-    if form.validate_on_submit() and form.validate_email(form.email):
+    if form.validate_on_submit():
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)

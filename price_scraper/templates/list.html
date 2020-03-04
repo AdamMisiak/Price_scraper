@@ -4,7 +4,7 @@
   <h1>Here is a list of all available users.</h1>
   <ul>
     {% for user in all_users  %}
-    <li>{{user}}</li>
+    <li>username: {{user.username}} email: {{user.email}} password: {{user.password}}</li>
     {% endfor %}
   </ul>
 
