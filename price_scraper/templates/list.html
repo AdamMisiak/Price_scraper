@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-  <h1>Here is a list of all available users.</h1>
-  <ul>
+  <h1 class="display-4">Here is a list of all available users.</h1>
+
     {% for user in all_users  %}
-    <li>username: {{user.username}} email: {{user.email}} password: {{user.password}}</li>
+    <p class="lead">username: {{user.username}} email: {{user.email}} password: {{user.password}}</p>
     {% endfor %}
-  </ul>
+
 
 </div>
 {% endblock %}

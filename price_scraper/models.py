@@ -1,7 +1,13 @@
 from flask_login import UserMixin
-from price_scraper import db
+from price_scraper import db, login_manager
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
+from flask_login import UserMixin
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 
 class Asset(db.Model):
