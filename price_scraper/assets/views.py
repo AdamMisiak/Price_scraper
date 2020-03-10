@@ -12,6 +12,14 @@ assets_blueprint = Blueprint('assets',__name__, template_folder='templates')
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
+    prices = [check_price_btc(), check_price_xrp(), check_price_xlm(), check_price_gld()]
+
+    return render_template('index.html', prices=prices)
+
+
+@app.route('/add_asset', methods=['GET', 'POST'])
+def add_asset():
+
     form = CheckPriceForm()
     if form.validate_on_submit():
 
@@ -57,7 +65,7 @@ def index():
 
         return redirect(url_for('assets.summary'))
 
-    return render_template('index.html', form=form)
+    return render_template('add_asset.html', form=form)
 
 
 @assets_blueprint.route('/summary')

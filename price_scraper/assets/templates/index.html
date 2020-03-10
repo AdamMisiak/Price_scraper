@@ -4,45 +4,20 @@
 
 <div class="jumbotron">
   <h1 class="display-4">Welcome to our Price Scraper site!</h1>
-  <p class="lead">Choose and type the quantity of your assets:</p>
-  <form method="post">
-    {{form.hidden_tag()}}
+  <p class="lead">Actual assets prices:</p>
 
-    <div class="form-group row">
-      {{ form.quantity_btc.label(class="col-sm-2 col-form-label") }}
-    <div class="col-sm-10">
-        {{ form.quantity_btc(class="form-control") }}
-    </div>
+<div class="divL">
+      <p class="lead">  BTC: {{ prices[0] }}</p>
+</div>
+<div class="divL">
+      <p class="lead">  XLM: {{ prices[1] }}</p>
+</div>
+  <div class="divR">
+      <p class="lead">  XRP: {{ prices[2] }}</p>
   </div>
-
-    <div class="form-group row">
-      {{ form.quantity_xlm.label(class="col-sm-2 col-form-label") }}
-    <div class="col-sm-10">
-        {{ form.quantity_xlm(class="form-control") }}
-    </div>
-  </div>
-
-    <div class="form-group row">
-      {{ form.quantity_xrp.label(class="col-sm-2 col-form-label") }}
-    <div class="col-sm-10">
-        {{ form.quantity_xrp(class="form-control") }}
-    </div>
-  </div>
-
-    <div class="form-group row">
-      {{ form.quantity_gld.label(class="col-sm-2 col-form-label") }}
-    <div class="col-sm-10">
-        {{ form.quantity_gld(class="form-control") }}
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="col-sm-10">
-        {{ form.submit(class="btn btn-primary") }}
-    </div>
-  </div>
-
-  </form>
+<div class="divR">
+    <p class="lead">  GLD: {{ prices[3] }}</p>
+</div>
 
 </div>
 
