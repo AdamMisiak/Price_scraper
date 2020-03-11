@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Here is a list of all available assets.</h1>
+
+    {% for asset in all_assets  %}
+    <p class="lead">ID: {{asset.id}} BTC: {{asset.quantity_btc}} XRP: {{asset.quantity_xrp}} XLM: {{asset.quantity_xlm}}
+    GLD: {{asset.quantity_gld}} USER_ID: {{asset.user_id}}</p>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

@@ -4,7 +4,8 @@
   <h1 class="display-4">Here is a list of all available users.</h1>
 
     {% for user in all_users  %}
-    <p class="lead">username: {{user.username}} email: {{user.email}} password: {{user.password}}</p>
+    <p class="lead">ID: {{user.id}} username: {{user.username}} email: {{user.email}} password: {{user.password}}
+    asset id: {{user.asset_id}}</p>
     {% endfor %}
 
 

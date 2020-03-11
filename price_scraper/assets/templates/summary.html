@@ -22,42 +22,42 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>{{session['name_btc']}}</td>
-      <td>{{session['quantity_btc']}}</td>
-      <td>{{session['price_btc_usd']}}</td>
+      <td>{{functions[0]}}</td>
+      <td>{{asset.quantity_btc}}</td>
+      <td>{{prices[0]}}</td>
       <td>{{session['price_btc_pln']}}</td>
-      <td>{{session['btc_value_usd']}}</td>
+      <td>{{prices[0]*asset.quantity_btc}}</td>
       <td>{{session['btc_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>{{session['name_xrp']}}</td>
-      <td>{{session['quantity_xrp']}}</td>
-      <td>{{session['price_xrp_usd']}}</td>
+      <td>{{functions[1]}}</td>
+      <td>{{asset.quantity_xrp}}</td>
+      <td>{{prices[1]}}</td>
       <td>{{session['price_xrp_pln']}}</td>
-      <td>{{session['xrp_value_usd']}}</td>
+      <td>{{prices[1]*asset.quantity_xrp}}</td>
       <td>{{session['xrp_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>{{session['name_xlm']}}</td>
-      <td>{{session['quantity_xlm']}}</td>
-      <td>{{session['price_xlm_usd']}}</td>
+      <td>{{functions[2]}}</td>
+      <td>{{asset.quantity_xlm}}</td>
+      <td>{{prices[2]}}</td>
       <td>{{session['price_xlm_pln']}}</td>
-      <td>{{session['xlm_value_usd']}}</td>
+      <td>{{prices[2]*asset.quantity_xlm}}</td>
       <td>{{session['xlm_value_pln']}}</td>
     </tr>
     <tr>
       <th scope="row">4</th>
-      <td>{{session['name_gld']}}</td>
-      <td>{{session['quantity_gld']}}</td>
-      <td>{{session['price_gld_usd']}}</td>
+      <td>{{functions[3]}}</td>
+      <td>{{asset.quantity_gld}}</td>
+      <td>{{prices[3]}}</td>
       <td>{{session['price_gld_pln']}}</td>
-      <td>{{session['gld_value_usd']}}</td>
+      <td>{{prices[3]*asset.quantity_gld}}</td>
       <td>{{session['gld_value_pln']}}</td>
     </tr>
       <tr>
-      <th scope="row">5</th>
+      <th scope="row"></th>
         <td></td>
         <td></td>
         <td></td>

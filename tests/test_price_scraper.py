@@ -3,16 +3,32 @@ from price_scraper.models import User
 from price_scraper.assets.functions import round_quantity
 from price_scraper.users.forms import RegistrationForm, LoginForm
 import pytest
+from unittest import mock
 
-@pytest.fixture
-def client():
+@pytest.fixture()
+def db_fixture():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
     app.config['TESTING'] = True
     app.config['WTF_CSRF_ENABLED'] = False
     db.create_all()
+    yield db
+    db.drop_all()
+
+
+@pytest.fixture
+def client(db_fixture):
     with app.test_client() as client:
         yield client
-    db.drop_all()
+
+
+@pytest.fixture
+def user(db_fixture):
+    user = User(email="one@one.com",
+                username="one",
+                password="one")
+
+    db.session.add(user)
+    db.session.commit()
 
 
 def test_index(client):
@@ -58,12 +74,16 @@ def test_register_user(client):
     assert user1.email == 'one@one.com'
 
 
-# def test_login_user(client):
-#     """Testing login user to DB"""
-#     post_register = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-#                                           'password':'one','password_confirm':'one'})
-#     post_login = client.post('/users/login', data={'email':'one@one.com', 'password':'one'})
-#     assert b'Welcome to our Price Scraper site!' in post_login.data
+def test_login_user(client):
+    """Testing login user to DB"""
+    with mock.patch('price_scraper.assets.views.check_price_btc',return_value = 3):
+        with mock.patch('price_scraper.assets.views.check_price_xrp',return_value = 3):
+            with mock.patch('price_scraper.assets.views.check_price_xlm',return_value = 3):
+                with mock.patch('price_scraper.assets.views.check_price_gld',return_value = 3):
+                    post_register = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
+                                                          'password':'one','password_confirm':'one'})
+                    post_login = client.post('/users/login', data={'email':'one@one.com', 'password':'one',}, follow_redirects=True)
+                    assert b'Welcome to our Price Scraper site!' in post_login.data
 
 
 def test_validate_email(client):
@@ -74,4 +94,15 @@ def test_validate_email(client):
                                           'password':'one','password_confirm':'one'})
     assert b'Email you have chosen is already taken!' in post.data
     assert b'Username you have chosen is already taken!' in post.data
+
+
+def test_add_asset(user,client):
+    post_login = client.post('/users/login', data={'email': 'one@one.com', 'password': 'one', })
+    post_asset = client.post('/add_asset', data={'quantity_btc':'14545', 'quantity_xrp':'2',
+                                          'quantity_xlm':'3','quantity_gld':'4'},follow_redirects=True)
+    assert b'14545' in post_asset.data
+
+
+
+
 
