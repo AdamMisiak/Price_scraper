@@ -36,9 +36,15 @@
       <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('users.account') }}">Account</a>
       </li>
+          {% if current_user.asset_id == None %}
       <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('add_asset') }}">Add Asset</a>
       </li>
+          {% else %}
+          <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('assets.summary') }}">My Asset</a>
+      </li>
+          {% endif %}
           {% else %}
       <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('users.register') }}">Register</a>
