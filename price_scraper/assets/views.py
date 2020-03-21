@@ -51,12 +51,25 @@ def summary():
     user = current_user
     asset = Asset.query.get(user.asset_id)
     names = [check_name_btc(), check_name_xrp(), check_name_xlm(), check_name_gld()]
-    prices = [check_price_btc(), check_price_xrp(), check_price_xlm(), check_price_gld()]
+    quantities = [asset.quantity_btc, asset.quantity_xrp, asset.quantity_xlm, asset.quantity_gld]
+    prices_usd = [check_price_btc(), check_price_xrp(), check_price_xlm(), check_price_gld()]
 
-    return render_template('summary.html', prices=prices,names=names, asset=asset)
+    prices_pln = [check_price_usd(prices_usd[0]), check_price_usd(prices_usd[1]), check_price_usd(prices_usd[2]),
+                  check_price_usd(prices_usd[3])]
 
-#HW model asset + templatka, zamien relationship + MIGRACJA!, walidacja ze asset musi miec user id (nie moze byc null)
-#TEST niec dziala
+    values_usd = [prices_usd[0]*quantities[0], prices_usd[1]*quantities[1],
+                  prices_usd[2]*quantities[2], prices_usd[3]*quantities[3]]
+
+    values_pln = [check_price_usd(values_usd[0]), check_price_usd(values_usd[1]), check_price_usd(values_usd[2]),
+                  check_price_usd(values_usd[3])]
+
+    parts = [round((values_usd[0]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3]))*100, 3),
+             round(values_usd[1]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3),
+             round(values_usd[2]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3),
+             round(values_usd[3]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3)]
+
+    return render_template('summary.html', names=names, quantities=quantities, prices_usd=prices_usd,
+                           prices_pln=prices_pln, values_usd=values_usd, values_pln=values_pln, parts=parts)
 
 @assets_blueprint.route('/list')
 def list_assets():
