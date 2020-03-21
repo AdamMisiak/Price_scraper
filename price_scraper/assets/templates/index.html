@@ -1,24 +1,69 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+var settings = {
+"url": "http://localhost:8000/",
+"method": "GET"
+}
+
+setInterval(function(){
+$.ajax(settings).done(function (response) {
+console.log(response);
+
+var btc = response.BTC;
+var xrp = response.XRP;
+var xlm = response.XLM;
+var gld = response.GLD;
+$("#btc").html(btc);
+$("#xrp").html(xrp);
+$("#xlm").html(xlm);
+$("#gld").html(gld);
+});
+}, 3000);
+
+
+</script>
 
 <div class="jumbotron">
-  <h1 class="display-4">Welcome to our Price Scraper site!</h1>
-  <p class="lead">Actual assets prices:</p>
+
+<h1 class="display-4">Welcome to our Price Scraper site!</h1>
+<p class="lead">Actual assets prices:</p>
+
+</center>
 
 <div class="divL">
-      <p class="lead">  BTC: {{ prices[0] }}</p>
+<p class="lead"> BTC: </p>
+<div id="btc" class="divL">
+<p class="lead"></p>
 </div>
-<div class="divL">
-      <p class="lead">  XLM: {{ prices[1] }}</p>
-</div>
-  <div class="divR">
-      <p class="lead">  XRP: {{ prices[2] }}</p>
-  </div>
-<div class="divR">
-    <p class="lead">  GLD: {{ prices[3] }}</p>
 </div>
 
+<div  class="divL">
+<p class="lead">  XRP: </p>
+<div id="xrp" class="divL">
+<p class="lead"></p>
+</div>
+</div>
+
+<div  class="divL">
+<p class="lead">  XLM: </p>
+<div id="xlm" class="divL">
+<p class="lead"></p>
+</div>
+</div>
+
+
+<div  class="divL">
+<p class="lead">  GLD: </p>
+<div id="gld" class="divL">
+<p class="lead"></p>
+</div>
+</div>
+
+</center>
+
+<br><br><br>
 </div>
 
 

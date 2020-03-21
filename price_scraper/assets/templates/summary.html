@@ -17,21 +17,24 @@
       <th scope="col">Price PLN</th>
       <th scope="col">Value USD</th>
       <th scope="col">Value PLN</th>
+      <th scope="col">Part %</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>{{functions[0]}}</td>
+      <td>{{names[0]}}</td>
       <td>{{asset.quantity_btc}}</td>
       <td>{{prices[0]}}</td>
       <td>{{session['price_btc_pln']}}</td>
       <td>{{prices[0]*asset.quantity_btc}}</td>
       <td>{{session['btc_value_pln']}}</td>
+      <td>{{(prices[0]*asset.quantity_btc/(prices[0]*asset.quantity_btc+prices[1]*asset.quantity_xrp+prices[2]*asset.quantity_xlm+
+            prices[3]*asset.quantity_gld))*100}}%</td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>{{functions[1]}}</td>
+      <td>{{names[1]}}</td>
       <td>{{asset.quantity_xrp}}</td>
       <td>{{prices[1]}}</td>
       <td>{{session['price_xrp_pln']}}</td>
@@ -40,7 +43,7 @@
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>{{functions[2]}}</td>
+      <td>{{names[2]}}</td>
       <td>{{asset.quantity_xlm}}</td>
       <td>{{prices[2]}}</td>
       <td>{{session['price_xlm_pln']}}</td>
@@ -49,7 +52,7 @@
     </tr>
     <tr>
       <th scope="row">4</th>
-      <td>{{functions[3]}}</td>
+      <td>{{names[3]}}</td>
       <td>{{asset.quantity_gld}}</td>
       <td>{{prices[3]}}</td>
       <td>{{session['price_gld_pln']}}</td>
@@ -68,6 +71,10 @@
     </tr>
   </tbody>
   </table>
+
+<hr class="my-4">
+  <p>If you want to update your assets information:</p>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('add_asset') }}" role="button">Update</a>
 
 {% endblock %}
 

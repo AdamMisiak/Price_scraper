@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import re
+
+
 
 url_btc = 'https://coinmarketcap.com/currencies/bitcoin/'
 url_xlm = 'https://coinmarketcap.com/currencies/stellar/'
@@ -35,6 +36,7 @@ def check_price_btc():
     price_btc = price_btc.replace(',','')
     converted_price_btc = float(price_btc[1:])
     converted_price_btc = round(converted_price_btc,3)
+    print(converted_price_btc)
     return converted_price_btc
 
 def check_name_xrp():
@@ -49,6 +51,7 @@ def check_price_xrp():
     price_xrp = price_xrp.replace(',','')
     converted_price_xrp = float(price_xrp[1:])
     converted_price_xrp = round(converted_price_xrp,3)
+    print(converted_price_xrp)
     return converted_price_xrp
 
 def check_name_xlm():
@@ -63,6 +66,7 @@ def check_price_xlm():
     price_xlm = price_xlm.replace(',','')
     converted_price_xlm = float(price_xlm[1:])
     converted_price_xlm = round(converted_price_xlm,3)
+    print(converted_price_xlm)
     return converted_price_xlm
 
 def check_name_gld():
@@ -77,6 +81,7 @@ def check_price_gld():
     price_gld = price_gld[5:13].replace(',', '')
     converted_price_gld = float(price_gld[:])
     converted_price_gld = round(converted_price_gld,3)
+    print(converted_price_gld)
     return converted_price_gld
 
 def my_coin_value_usd(quantity,price_usd):
@@ -95,3 +100,10 @@ def round_quantity(quantity):
     elif (type(quantity) == int):
         quantity = round(float(quantity),1)
     return quantity
+
+
+
+# def async_prices():
+#     many = asyncio.gather(check_price_btc(),check_price_xrp(),check_price_xlm(),check_price_gld())
+#     loop = asyncio.get_event_loop()
+#     loop.run_until_complete(many)

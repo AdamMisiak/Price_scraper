@@ -31,6 +31,16 @@ def add_asset():
         db.session.add(asset)
         db.session.commit()
 
+        # MAIL
+        # PO
+        # REJESTRACJI + AKTYWACJA
+        # KONT
+        all_assets = Asset.query.all()
+        for asset in all_assets:
+            if asset.user_id == None:
+                db.session.delete(asset)
+                db.session.commit()
+
         return redirect(url_for('assets.summary'))
 
     return render_template('add_asset.html', form=form)
@@ -40,9 +50,10 @@ def add_asset():
 def summary():
     user = current_user
     asset = Asset.query.get(user.asset_id)
-    functions = [check_name_btc(), check_name_xrp(), check_name_xlm(), check_name_gld()]
+    names = [check_name_btc(), check_name_xrp(), check_name_xlm(), check_name_gld()]
     prices = [check_price_btc(), check_price_xrp(), check_price_xlm(), check_price_gld()]
-    return render_template('summary.html', functions=functions, prices=prices, asset=asset)
+
+    return render_template('summary.html', prices=prices,names=names, asset=asset)
 
 #HW model asset + templatka, zamien relationship + MIGRACJA!, walidacja ze asset musi miec user id (nie moze byc null)
 #TEST niec dziala
