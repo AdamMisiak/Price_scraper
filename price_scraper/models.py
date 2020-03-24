@@ -1,4 +1,3 @@
-from flask_login import UserMixin
 from price_scraper import db, login_manager
 from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
@@ -32,5 +31,11 @@ class User(db.Model,UserMixin):
     username = db.Column(db.String(64), unique=True, index=True)
     password = db.Column(db.String(255), nullable=False)
     asset_id = db.Column(db.Integer, ForeignKey('asset.id'))
+
+
+
+
+
+
 
 

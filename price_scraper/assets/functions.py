@@ -36,7 +36,7 @@ def check_price_btc():
     price_btc = price_btc.replace(',','')
     converted_price_btc = float(price_btc[1:])
     converted_price_btc = round(converted_price_btc,3)
-    print(converted_price_btc)
+    # print(converted_price_btc)
     return converted_price_btc
 
 def check_name_xrp():
@@ -51,7 +51,7 @@ def check_price_xrp():
     price_xrp = price_xrp.replace(',','')
     converted_price_xrp = float(price_xrp[1:])
     converted_price_xrp = round(converted_price_xrp,3)
-    print(converted_price_xrp)
+    # print(converted_price_xrp)
     return converted_price_xrp
 
 def check_name_xlm():
@@ -66,7 +66,7 @@ def check_price_xlm():
     price_xlm = price_xlm.replace(',','')
     converted_price_xlm = float(price_xlm[1:])
     converted_price_xlm = round(converted_price_xlm,3)
-    print(converted_price_xlm)
+    # print(converted_price_xlm)
     return converted_price_xlm
 
 def check_name_gld():
@@ -81,29 +81,25 @@ def check_price_gld():
     price_gld = price_gld[5:13].replace(',', '')
     converted_price_gld = float(price_gld[:])
     converted_price_gld = round(converted_price_gld,3)
-    print(converted_price_gld)
+    # print(converted_price_gld)
     return converted_price_gld
+
 
 def my_coin_value_usd(quantity,price_usd):
     coin_value_usd = quantity*price_usd
     coin_value_usd = round(coin_value_usd,3)
     return coin_value_usd
 
+
 def my_coin_value_pln(quantity,price_pln):
     coin_value_pln = quantity*price_pln
     coin_value_pln = round(coin_value_pln,3)
     return coin_value_pln
 
+
 def round_quantity(quantity):
-    if (type(quantity) == float):
+    if type(quantity) == float:
         quantity = round(quantity,3)
-    elif (type(quantity) == int):
+    elif type(quantity) == int:
         quantity = round(float(quantity),1)
     return quantity
-
-
-
-# def async_prices():
-#     many = asyncio.gather(check_price_btc(),check_price_xrp(),check_price_xlm(),check_price_gld())
-#     loop = asyncio.get_event_loop()
-#     loop.run_until_complete(many)

@@ -32,8 +32,8 @@ def user(db_fixture):
 
 
 def test_index(client):
-    rv = client.get('/assets/summary')
-    assert b'This is your portfolio:' in rv.data
+    rv = client.get('/')
+    assert b'Actual assets prices:' in rv.data
 
 
 def test_round_quantity():

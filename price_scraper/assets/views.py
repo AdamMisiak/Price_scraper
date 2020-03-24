@@ -1,3 +1,4 @@
+import requests
 from flask import Flask, render_template, redirect, url_for, session, Blueprint
 from price_scraper.assets.forms import  CheckPriceForm
 from price_scraper.assets.functions import check_name_btc,check_name_xlm,check_name_gld,check_name_xrp,check_price_btc,\
@@ -31,10 +32,6 @@ def add_asset():
         db.session.add(asset)
         db.session.commit()
 
-        # MAIL
-        # PO
-        # REJESTRACJI + AKTYWACJA
-        # KONT
         all_assets = Asset.query.all()
         for asset in all_assets:
             if asset.user_id == None:
@@ -50,26 +47,33 @@ def add_asset():
 def summary():
     user = current_user
     asset = Asset.query.get(user.asset_id)
-    names = [check_name_btc(), check_name_xrp(), check_name_xlm(), check_name_gld()]
+    names = ['Bitcoin', 'Ripple', "Stellar", 'Gold']
     quantities = [asset.quantity_btc, asset.quantity_xrp, asset.quantity_xlm, asset.quantity_gld]
-    prices_usd = [check_price_btc(), check_price_xrp(), check_price_xlm(), check_price_gld()]
+    prices = requests.get('http://127.0.0.1:8000/')
 
-    prices_pln = [check_price_usd(prices_usd[0]), check_price_usd(prices_usd[1]), check_price_usd(prices_usd[2]),
-                  check_price_usd(prices_usd[3])]
+    actual_usd = prices.json()["USD"]
+
+    prices_usd = [prices.json()["BTC"], prices.json()["XRP"], prices.json()["XLM"], prices.json()["GLD"]]
+
+    prices_pln = [round(actual_usd*prices_usd[0], 3), round(actual_usd*prices_usd[1], 3),
+                  round(actual_usd*prices_usd[2], 3), round(actual_usd*prices_usd[3], 3)]
 
     values_usd = [prices_usd[0]*quantities[0], prices_usd[1]*quantities[1],
                   prices_usd[2]*quantities[2], prices_usd[3]*quantities[3]]
 
-    values_pln = [check_price_usd(values_usd[0]), check_price_usd(values_usd[1]), check_price_usd(values_usd[2]),
-                  check_price_usd(values_usd[3])]
+    values_pln = [round(actual_usd*values_usd[0], 3), round(actual_usd*values_usd[1], 3),
+                  round(actual_usd*values_usd[2], 3), round(actual_usd*values_usd[3], 3)]
 
     parts = [round((values_usd[0]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3]))*100, 3),
              round(values_usd[1]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3),
              round(values_usd[2]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3),
              round(values_usd[3]/(values_usd[0]+values_usd[1]+values_usd[2]+values_usd[3])*100, 3)]
 
+    total = values_pln[0]+values_pln[1]+values_pln[2]+values_pln[3]
+
     return render_template('summary.html', names=names, quantities=quantities, prices_usd=prices_usd,
-                           prices_pln=prices_pln, values_usd=values_usd, values_pln=values_pln, parts=parts)
+                           prices_pln=prices_pln, values_usd=values_usd, values_pln=values_pln, parts=parts,
+                           total = total)
 
 @assets_blueprint.route('/list')
 def list_assets():

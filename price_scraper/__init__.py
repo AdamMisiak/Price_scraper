@@ -11,6 +11,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# SECURITY_PASSWORD_SALT = 'my_precious_two'
 
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)

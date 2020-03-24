@@ -1,27 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 
+#przypisac do funckji i wywolac raz a potem w set interval DONE, + ogarnac undefined + dodac cene usd do serwisu osobnego (moze nazwy tez) DONE
+# ODSWIEZANIE W SUMMARY DONE + kryptowanie hasla + aktywacja uzytkownika + poczytaj o pull req + makefile!!!
 <script>
 var settings = {
 "url": "http://localhost:8000/",
 "method": "GET"
 }
 
-setInterval(function(){
+var btc = 0;
+var xrp = 0;
+var xlm = 0;
+var gld = 0;
+
+var btc_p = 0;
+
+function prices(){
+
 $.ajax(settings).done(function (response) {
 console.log(response);
+btc_p = btc;
+console.log(btc_p);
+btc = "$" + response.BTC;
+xrp = "$" + response.XRP;
+xlm = "$" + response.XLM;
+gld = "$" + response.GLD;
 
-var btc = response.BTC;
-var xrp = response.XRP;
-var xlm = response.XLM;
-var gld = response.GLD;
+$("#btc_p").html(btc_p);
 $("#btc").html(btc);
 $("#xrp").html(xrp);
 $("#xlm").html(xlm);
 $("#gld").html(gld);
 });
-}, 3000);
+}
 
+prices()
+setInterval(prices, 3000);
 
 </script>
 
@@ -34,7 +49,11 @@ $("#gld").html(gld);
 
 <div class="divL">
 <p class="lead"> BTC: </p>
-<div id="btc" class="divL">
+
+<div id="btc">
+<p class="lead"></p>
+</div>
+<div id="btc_p">
 <p class="lead"></p>
 </div>
 </div>
