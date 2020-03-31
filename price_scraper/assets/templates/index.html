@@ -1,40 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
-#przypisac do funckji i wywolac raz a potem w set interval DONE, + ogarnac undefined done + dodac cene usd do serwisu osobnego (moze nazwy tez) DONE
-# ODSWIEZANIE W SUMMARY DONE + kryptowanie hasla done + aktywacja uzytkownika + poczytaj o pull req + makefile!!!
 <script>
 var settings = {
 "url": "http://localhost:8000/",
 "method": "GET"
 }
-
 var btc = 0;
 var xrp = 0;
 var xlm = 0;
 var gld = 0;
-
-var btc_p = 0;
 
 function prices(){
 
 $.ajax(settings).done(function (response) {
 console.log(response);
 btc_p = btc;
-console.log(btc_p);
+xrp_p = xrp;
+xlm_p = xlm;
+gld_p = gld;
+
 btc = "$" + response.BTC;
 xrp = "$" + response.XRP;
 xlm = "$" + response.XLM;
 gld = "$" + response.GLD;
 
-$("#btc_p").html(btc_p);
+
 $("#btc").html(btc);
 $("#xrp").html(xrp);
 $("#xlm").html(xlm);
 $("#gld").html(gld);
 });
 }
-
 prices()
 setInterval(prices, 3000);
 
@@ -43,7 +40,7 @@ setInterval(prices, 3000);
 <div class="jumbotron">
 
 <h1 class="display-4">Welcome to our Price Scraper site!</h1>
-<p class="lead">Actual assets prices:</p>
+<p class="lead">Current assets prices:</p>
 
 </center>
 
@@ -53,36 +50,39 @@ setInterval(prices, 3000);
 <div id="btc">
 <p class="lead"></p>
 </div>
-<div id="btc_p">
-<p class="lead"></p>
-</div>
+
 </div>
 
 <div  class="divL">
 <p class="lead">  XRP: </p>
-<div id="xrp" class="divL">
+
+<div id="xrp">
 <p class="lead"></p>
 </div>
+
 </div>
 
 <div  class="divL">
 <p class="lead">  XLM: </p>
-<div id="xlm" class="divL">
+
+<div id="xlm">
 <p class="lead"></p>
 </div>
+
 </div>
 
 
 <div  class="divL">
 <p class="lead">  GLD: </p>
-<div id="gld" class="divL">
+
+<div id="gld">
 <p class="lead"></p>
 </div>
+
 </div>
 
+<br><br>
 </center>
-
-<br><br><br>
 </div>
 
 

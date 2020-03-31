@@ -58,8 +58,8 @@ def summary():
     prices_pln = [round(actual_usd*prices_usd[0], 3), round(actual_usd*prices_usd[1], 3),
                   round(actual_usd*prices_usd[2], 3), round(actual_usd*prices_usd[3], 3)]
 
-    values_usd = [prices_usd[0]*quantities[0], prices_usd[1]*quantities[1],
-                  prices_usd[2]*quantities[2], prices_usd[3]*quantities[3]]
+    values_usd = [round(prices_usd[0]*quantities[0], 3), round(prices_usd[1]*quantities[1], 3),
+                  round(prices_usd[2]*quantities[2], 3), round(prices_usd[3]*quantities[3], 3)]
 
     values_pln = [round(actual_usd*values_usd[0], 3), round(actual_usd*values_usd[1], 3),
                   round(actual_usd*values_usd[2], 3), round(actual_usd*values_usd[3], 3)]
