@@ -5,6 +5,7 @@
   <h1 class="display-4">Your account information:</h1>
   <p class="lead">  Email: {{ user.email }}</p>
   <p class="lead">  Username: {{ user.username }}</p>
+  <p class="lead">  Confirmed: {{ user.confirmed }}</p>
   <hr class="my-4">
   <p>If you want to update your account information:</p>
   <a class="btn btn-primary btn-lg" href="{{ url_for('users.update') }}" role="button">Update</a>

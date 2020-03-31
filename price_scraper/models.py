@@ -21,7 +21,8 @@ class Asset(db.Model):
 
 
     def __repr__(self):
-        return f"BTC quantity= {self.quantity_btc}, XRP quantity= {self.quantity_xrp}, XLM quantity= {self.quantity_xlm}, GLD quantity= {self.quantity_gld}"
+        return f"BTC quantity= {self.quantity_btc}, XRP quantity= {self.quantity_xrp}," \
+               f" XLM quantity= {self.quantity_xlm}, GLD quantity= {self.quantity_gld}"
 
 class User(db.Model,UserMixin):
     __tablename__ = 'user'
@@ -30,6 +31,8 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     password = db.Column(db.String(255), nullable=False)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
     asset_id = db.Column(db.Integer, ForeignKey('asset.id'))
 
 
