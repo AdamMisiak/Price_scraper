@@ -71,9 +71,9 @@ def confirm_email(token):
 def list_users():
     all_users = User.query.all()
     # for user in all_users:
-    #     if user.asset_id is None:
-    #         db.session.delete(user)
-    #         db.session.commit()
+    #     # if user.asset_id is None:
+    #     db.session.delete(user)
+    #     db.session.commit()
 
     return render_template('list.html', all_users=all_users)
 

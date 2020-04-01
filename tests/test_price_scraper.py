@@ -2,7 +2,9 @@ from price_scraper import app, db
 from price_scraper.models import User
 from price_scraper.assets.functions import round_quantity
 from price_scraper.users.forms import RegistrationForm, LoginForm
+from werkzeug.security import generate_password_hash, check_password_hash
 import pytest
+import pdb
 from unittest import mock
 
 @pytest.fixture()
@@ -25,7 +27,8 @@ def client(db_fixture):
 def user(db_fixture):
     user = User(email="one@one.com",
                 username="one",
-                password="one")
+                password=generate_password_hash("one"),
+                confirmed=False)
 
     db.session.add(user)
     db.session.commit()
@@ -33,7 +36,7 @@ def user(db_fixture):
 
 def test_index(client):
     rv = client.get('/')
-    assert b'Actual assets prices:' in rv.data
+    assert b'Current assets prices:' in rv.data
 
 
 def test_round_quantity():
@@ -70,7 +73,7 @@ def test_register_user(client):
     """Testing posting user to DB"""
     post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
                                           'password':'one','password_confirm':'one'})
-    user1 = User.query.filter_by(email='one@one.com',username='one',password='one').first()
+    user1 = User.query.filter_by(email='one@one.com',username='one').first()
     assert user1.email == 'one@one.com'
 
 
@@ -101,6 +104,13 @@ def test_add_asset(user,client):
     post_asset = client.post('/add_asset', data={'quantity_btc':'14545', 'quantity_xrp':'2',
                                           'quantity_xlm':'3','quantity_gld':'4'},follow_redirects=True)
     assert b'14545' in post_asset.data
+
+def test_crypting_decrypting_password(client):
+    """Testing hashing passwords"""
+    post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
+                                          'password':'one','password_confirm':'one'})
+    user1 = User.query.filter_by(email='one@one.com',username='one').first()
+    assert check_password_hash(user1.password, 'one')
 
 
 
