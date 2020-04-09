@@ -21,6 +21,7 @@
     </tr>
   </thead>
   <tbody>
+    {% if quantities[0] != 0 %}
     <tr>
       <th scope="row">1</th>
       <td>{{names[0]}}</td>
@@ -31,6 +32,8 @@
       <td>{{values_pln[0]}}</td>
       <td>{{parts[0]}}%</td>
     </tr>
+    {% endif %}
+    {% if quantities[1] != 0 %}
     <tr>
       <th scope="row">2</th>
       <td>{{names[1]}}</td>
@@ -41,6 +44,8 @@
       <td>{{values_pln[1]}}</td>
       <td>{{parts[1]}}%</td>
     </tr>
+    {% endif %}
+    {% if quantities[2] != 0 %}
     <tr>
       <th scope="row">3</th>
       <td>{{names[2]}}</td>
@@ -51,6 +56,8 @@
       <td>{{values_pln[2]}}</td>
       <td>{{parts[2]}}%</td>
     </tr>
+    {% endif %}
+    {% if quantities[3] != 0 %}
     <tr>
       <th scope="row">4</th>
       <td>{{names[3]}}</td>
@@ -61,6 +68,7 @@
       <td>{{values_pln[3]}}</td>
       <td>{{parts[3]}}%</td>
     </tr>
+    {% endif %}
       <tr>
       <th scope="row"></th>
         <td></td>

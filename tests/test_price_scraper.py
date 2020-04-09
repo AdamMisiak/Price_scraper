@@ -105,6 +105,7 @@ def test_add_asset(user,client):
                                           'quantity_xlm':'3','quantity_gld':'4'},follow_redirects=True)
     assert b'14545' in post_asset.data
 
+
 def test_crypting_decrypting_password(client):
     """Testing hashing passwords"""
     post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
