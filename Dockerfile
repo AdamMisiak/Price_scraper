@@ -20,7 +20,4 @@ RUN mkdir /var/run/supervisor
 COPY ./supervisord_2.ini /etc/supervisor/conf.d/supervisord_2.ini
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
-#CMD ["nginx", "-g", "daemon off;"]
 CMD ["supervisord"]
-#MIGRACJA BAZA FLASK, flask db init i te inne komendy
-#2 logi uwsgi zaginely, dead or alive -> powinny byc w katalogu var log (znajdz je najpierw)
