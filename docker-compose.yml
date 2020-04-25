@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  app:
+    build: "./"
+    volumes:
+    - ./:/var/www/
+    ports:
+      - 12345:80
+  package:
+    build: "./Price_scraper_assets"
+    volumes:
+      - ./Price_scraper_assets:/var/www/
+    ports:
+      - 23456:80
+    depends_on:
+      - app
