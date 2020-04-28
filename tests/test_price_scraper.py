@@ -1,10 +1,11 @@
-from price_scraper import app, db
+from price_scraper import app, db, mail
 from price_scraper.models import User
 from price_scraper.assets.functions import round_quantity
 from price_scraper.users.forms import RegistrationForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import pytest
-import pdb
+import responses
+import requests
 from unittest import mock
 
 @pytest.fixture()
@@ -71,10 +72,13 @@ def test_login_form(client):
 
 def test_register_user(client):
     """Testing posting user to DB"""
-    post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-                                          'password':'one','password_confirm':'one'})
-    user1 = User.query.filter_by(email='one@one.com',username='one').first()
-    assert user1.email == 'one@one.com'
+    with mail.record_messages() as outbox:
+        post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
+                                              'password':'one','password_confirm':'one'})
+        user1 = User.query.filter_by(email='one@one.com',username='one').first()
+        assert user1.email == 'one@one.com'
+        assert len(outbox) == 1
+        assert outbox[0].subject == "Please confirm your email"
 
 
 def test_login_user(client):
@@ -83,35 +87,46 @@ def test_login_user(client):
         with mock.patch('price_scraper.assets.views.check_price_xrp',return_value = 3):
             with mock.patch('price_scraper.assets.views.check_price_xlm',return_value = 3):
                 with mock.patch('price_scraper.assets.views.check_price_gld',return_value = 3):
-                    post_register = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-                                                          'password':'one','password_confirm':'one'})
-                    post_login = client.post('/users/login', data={'email':'one@one.com', 'password':'one',}, follow_redirects=True)
-                    assert b'Welcome to our Price Scraper site!' in post_login.data
+                    with mail.record_messages() as outbox:
+                        post_register = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
+                                                              'password':'one','password_confirm':'one'})
+                        post_login = client.post('/users/login', data={'email':'one@one.com', 'password':'one',}, follow_redirects=True)
+                        assert b'Welcome to our Price Scraper site!' in post_login.data
 
 
-def test_validate_email(client):
+def test_validate_email(client, ):
     """Testing email validator"""
-    post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-                                          'password':'one','password_confirm':'one'})
-    post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-                                          'password':'one','password_confirm':'one'})
-    assert b'Email you have chosen is already taken!' in post.data
-    assert b'Username you have chosen is already taken!' in post.data
 
+    with mail.record_messages() as outbox:
+        post = client.post('/users/register', data={'email': 'one@one.com', 'username': 'one',
+                                                    'password': 'one', 'password_confirm': 'one'})
+        post = client.post('/users/register', data={'email': 'one@one.com', 'username': 'one',
+                                                    'password': 'one', 'password_confirm': 'one'})
 
-def test_add_asset(user,client):
+        assert b'Email you have chosen is already taken!' in post.data
+        assert b'Username you have chosen is already taken!' in post.data
+
+@responses.activate
+def test_add_asset(user, client):
+    responses.add(responses.GET, 'http://package/',
+                  json={"BTC":1.0,"XRP":1.0,"XLM":1.0,"GLD":1.0,"USD":1.0})
+    resp = requests.get('http://package/')
+
     post_login = client.post('/users/login', data={'email': 'one@one.com', 'password': 'one', })
     post_asset = client.post('/add_asset', data={'quantity_btc':'14545', 'quantity_xrp':'2',
-                                          'quantity_xlm':'3','quantity_gld':'4'},follow_redirects=True)
+                                              'quantity_xlm':'3','quantity_gld':'4'},follow_redirects=True)
+
     assert b'14545' in post_asset.data
+    assert resp.json() == {"BTC":1.0,"XRP":1.0,"XLM":1.0,"GLD":1.0,"USD":1.0}
 
 
 def test_crypting_decrypting_password(client):
     """Testing hashing passwords"""
-    post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
-                                          'password':'one','password_confirm':'one'})
-    user1 = User.query.filter_by(email='one@one.com',username='one').first()
-    assert check_password_hash(user1.password, 'one')
+    with mail.record_messages() as outbox:
+        post = client.post('/users/register', data={'email':'one@one.com', 'username':'one',
+                                              'password':'one','password_confirm':'one'})
+        user1 = User.query.filter_by(email='one@one.com',username='one').first()
+        assert check_password_hash(user1.password, 'one')
 
 
 

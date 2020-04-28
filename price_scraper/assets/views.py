@@ -49,7 +49,7 @@ def summary():
     asset = Asset.query.get(user.asset_id)
     names = ['Bitcoin', 'Ripple', "Stellar", 'Gold']
     quantities = [asset.quantity_btc, asset.quantity_xrp, asset.quantity_xlm, asset.quantity_gld]
-    prices = requests.get('http://172.17.0.2:80/')
+    prices = requests.get('http://package/')
 
     actual_usd = prices.json()["USD"]
 
@@ -73,7 +73,8 @@ def summary():
 
     return render_template('summary.html', names=names, quantities=quantities, prices_usd=prices_usd,
                            prices_pln=prices_pln, values_usd=values_usd, values_pln=values_pln, parts=parts,
-                           total = total)
+                           total=total)
+
 
 @assets_blueprint.route('/list')
 def list_assets():
