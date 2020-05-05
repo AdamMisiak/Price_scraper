@@ -15,9 +15,13 @@ jobs:
       - run:
           command: python -m pytest -v tests
           name: Test
+
+      -run: run coverage xml
+
       - codecov/upload:
           file: coverage.xml
           flags: price_scraper
+
 
 workflows:
   main:
