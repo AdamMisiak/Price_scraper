@@ -10,9 +10,10 @@ from unittest import mock
 
 @pytest.fixture()
 def db_fixture():
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
-    app.config['TESTING'] = True
-    app.config['WTF_CSRF_ENABLED'] = False
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+    # app.config['TESTING'] = True
+    # app.config['WTF_CSRF_ENABLED'] = False
+    app.config.from_object("config.TestingConfig")
     db.create_all()
     yield db
     db.drop_all()
