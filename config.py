@@ -23,6 +23,8 @@ class DevelopmentConfig(Config):
 
     MAIL_DEFAULT_SENDER = 'test.flask369@gmail.com'
 
+    SECURITY_PASSWORD_SALT = 'my_precious_two'
+
 
 class TestingConfig(Config):
     TESTING = True
