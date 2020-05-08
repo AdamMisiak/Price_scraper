@@ -16,11 +16,11 @@ jobs:
           command: python -m pytest -v tests
           name: Test
 
-      - run: run coverage xml
-
       - codecov/upload:
           file: coverage.xml
           flags: price_scraper
+          
+      - bash <(curl -s https://codecov.io/bash) -t token
 
 
 workflows:
