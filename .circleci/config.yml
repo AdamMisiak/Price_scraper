@@ -17,10 +17,8 @@ jobs:
           name: Test
 
       - codecov/upload:
-          file: coverage.xml
+          file: coverage/*.json
           flags: price_scraper
-          
-      - bash <(curl -s https://codecov.io/bash) -t token
 
 
 workflows:
