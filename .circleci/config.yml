@@ -13,7 +13,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: python -m pytest -v --cov tests
+          command: pytest -v --cov tests
           name: Test
 
       - run:
