@@ -12,8 +12,8 @@ app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 database_uri = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
-# APP DEVELOPMENT CONFIGURATION
-app.config.from_object("config.DevelopmentConfig")
+CONFIG = os.environ.get('CONFIG', 'config.TestingConfig')
+app.config.from_object(CONFIG)
 
 # CREATING DB AND FLASK MAIL
 db = SQLAlchemy(app)
@@ -38,7 +38,3 @@ from price_scraper.users.views import users_blueprint
 
 app.register_blueprint(assets_blueprint, url_prefix='/assets')
 app.register_blueprint(users_blueprint, url_prefix='/users')
-
-
-#coverage (chyba nowa linijka od matti z xlm)
-#docker compose

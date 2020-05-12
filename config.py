@@ -6,6 +6,7 @@ class Config(object):
     TESTING = False
     SECRET_KEY = "mysecret"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECURITY_PASSWORD_SALT = 'my_precious_two'
 
 
 class DevelopmentConfig(Config):
@@ -23,12 +24,15 @@ class DevelopmentConfig(Config):
 
     MAIL_DEFAULT_SENDER = 'test.flask369@gmail.com'
 
-    SECURITY_PASSWORD_SALT = 'my_precious_two'
-
 
 class TestingConfig(Config):
     TESTING = True
 
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     WTF_CSRF_ENABLED = False
+    MAIL_SUPPRESS_SEND = True
+    MAIL_DEFAULT_SENDER = 'test.flask369@gmail.com'
+
+
+
 

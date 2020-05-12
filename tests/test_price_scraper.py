@@ -6,14 +6,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import pytest
 import responses
 import requests
+
 from unittest import mock
+
+
 
 @pytest.fixture()
 def db_fixture():
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
-    # app.config['TESTING'] = True
-    # app.config['WTF_CSRF_ENABLED'] = False
-    app.config.from_object("config.TestingConfig")
     db.create_all()
     yield db
     db.drop_all()
@@ -95,7 +94,7 @@ def test_login_user(client):
                         assert b'Welcome to our Price Scraper site!' in post_login.data
 
 
-def test_validate_email(client, ):
+def test_validate_email(client):
     """Testing email validator"""
 
     with mail.record_messages() as outbox:
