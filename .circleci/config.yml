@@ -13,7 +13,7 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: pytest -v --cov tests
+          command: pytest -v --cov price_scraper tests
           name: Test
 
       - run:
