@@ -13,11 +13,14 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: python -m pytest -v tests
+          command: python -m pytest -v --cov tests
           name: Test
 
+      - run:
+          coverage xml
+
       - codecov/upload:
-          file: coverage/*.json
+          file: coverage.xml
           flags: price_scraper
 
 
