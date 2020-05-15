@@ -11,6 +11,7 @@ app = Flask(__name__)
 # CREATING DB URI
 basedir = os.path.abspath(os.path.dirname(__file__))
 database_uri = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+print(database_uri)
 
 CONFIG = os.environ.get('CONFIG', 'config.TestingConfig')
 app.config.from_object(CONFIG)
