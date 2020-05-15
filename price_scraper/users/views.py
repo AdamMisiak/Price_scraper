@@ -39,6 +39,7 @@ def register():
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    print(app.config)
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if not check_password_hash(user.password, form.password.data):
