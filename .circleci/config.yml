@@ -13,7 +13,8 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: export CONFIG=config.TestingConfig
+          environment:
+            CONFIG: config.TestingConfig
           name: Environment variables
 
       - run:
