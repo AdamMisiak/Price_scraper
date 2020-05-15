@@ -17,7 +17,7 @@ jobs:
           name: Test
 
       - run:
-          coverage xml
+           python -m coverage xml
 
       - codecov/upload:
           file: coverage.xml
