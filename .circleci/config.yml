@@ -13,11 +13,6 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          environment:
-            CONFIG: config.TestingConfig
-          name: Environment variables
-
-      - run:
           command: python -m pytest -v --cov=price_scraper ./tests/
           name: Test
 
