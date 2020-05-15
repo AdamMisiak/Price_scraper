@@ -51,7 +51,6 @@ def login():
 @users_blueprint.route('/confirm/<token>')
 def confirm_email(token):
     try:
-        #pdb.set_trace()
         email = confirm_token(token)
     except:
         app.logger.info('The confirmation link is invalid or has expired.', 'danger')
