@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx
+RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx make
 
 COPY ./requirements.txt /var/www/requirements.txt
 COPY ./price_scraper /var/www/price_scraper
@@ -12,6 +12,7 @@ COPY ./price_scraper_nginx /etc/nginx/conf.d/price_scraper_nginx.conf
 
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
+
 RUN mkdir /run/nginx
 RUN mkdir /var/log/supervisor/
 RUN mkdir /var/log/uwsgi/
