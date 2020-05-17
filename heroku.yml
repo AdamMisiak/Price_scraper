@@ -1,3 +1,10 @@
 build:
   docker:
     web: Dockerfile
+    package: ./Price_scraper_assets/Dockerfile
+
+run:
+  image: web
+
+
+
