@@ -1,5 +1,5 @@
 server {
-    listen 800;
+    listen 12347;
     server_name _;
 
     location / {
