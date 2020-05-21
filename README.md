@@ -18,7 +18,7 @@ To run app locally:
 ```
 docker-compose up --build
 ```
-After building 2 Dockerfiles app will be started.\ 
+After building 2 Dockerfiles app will be started.\
 For main app:
 ```
 http://localhost:12345/
@@ -27,7 +27,7 @@ For prices of assets in json format:
 ```
 http://localhost:23456/
 ```
-For proper operating of prices display "CORS" browser plugin recomended.
+"CORS" browser plugin recomended for proper prices displaying.
 
 ## Contact
 Created by Adam Misiak
