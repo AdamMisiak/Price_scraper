@@ -21,5 +21,5 @@ RUN mkdir /var/run/supervisor
 COPY ./supervisord_2.ini /etc/supervisor/conf.d/supervisord_2.ini
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
-RUN sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/price_scraper_nginx.conf
-CMD ["supervisord"]
+ENTRYPOINT ["make"]
+CMD ["dockerfile-sed"]
