@@ -7,9 +7,5 @@ run-test:
 
 dockerfile-sed:
 	sed -i -e 's/$$PORT/'"$$PORT"'/g' /etc/nginx/conf.d/price_scraper_nginx.conf
-	cat /etc/nginx/conf.d/price_scraper_nginx.conf
-	cat /etc/nginx/nginx.conf
-	ls /etc/nginx/conf.d/
 	rm /etc/nginx/conf.d/default.conf
-	ls /etc/nginx/conf.d/
 	supervisord
