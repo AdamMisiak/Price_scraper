@@ -14,6 +14,7 @@ COPY ./price_scraper/Makefile /var/www/
 
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
+RUN ls /etc/nginx/conf.d/
 
 RUN mkdir /run/nginx
 RUN mkdir /var/log/supervisor/
@@ -27,3 +28,6 @@ WORKDIR /var/www/
 
 ENTRYPOINT ["make"]
 CMD ["dockerfile-sed"]
+
+ls w dockerfile sprawdzic czy jest conf deafual
+cos tworzy go = usunaac!
