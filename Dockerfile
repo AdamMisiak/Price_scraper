@@ -15,7 +15,6 @@ COPY ./price_scraper/Makefile /var/www/
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
 
-
 RUN mkdir /run/nginx
 RUN mkdir /var/log/supervisor/
 RUN mkdir /var/log/uwsgi/
