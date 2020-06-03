@@ -1,5 +1,5 @@
 server {
-    listen 12347;
+    listen $PORT;
     server_name _;
 
     location / {

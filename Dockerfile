@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx make
+RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx make sed
 
 COPY ./requirements.txt /var/www/requirements.txt
 COPY ./price_scraper /var/www/price_scraper
@@ -21,4 +21,5 @@ RUN mkdir /var/run/supervisor
 COPY ./supervisord_2.ini /etc/supervisor/conf.d/supervisord_2.ini
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
+RUN sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/price_scraper_nginx.conf
 CMD ["supervisord"]
