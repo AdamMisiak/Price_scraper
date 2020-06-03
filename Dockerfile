@@ -14,7 +14,7 @@ COPY ./price_scraper/Makefile /var/www/
 
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
-RUN ls -lha /etc/nginx/conf.d/
+
 
 RUN mkdir /run/nginx
 RUN mkdir /var/log/supervisor/
@@ -25,6 +25,8 @@ COPY ./supervisord_2.ini /etc/supervisor/conf.d/supervisord_2.ini
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
 WORKDIR /var/www/
+
+RUN ls -lha /etc/nginx/conf.d/
 
 ENTRYPOINT ["make"]
 CMD ["dockerfile-sed"]
