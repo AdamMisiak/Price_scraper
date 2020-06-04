@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx make sed
+RUN apk --update add bash nano gcc libffi-dev g++ git openssl-dev linux-headers nginx make
 
 COPY ./requirements.txt /var/www/requirements.txt
 COPY ./price_scraper /var/www/price_scraper
@@ -9,7 +9,6 @@ COPY ./wsgi.py /var/www/wsgi.py
 COPY ./price_scraper.ini /var/www/price_scraper.ini
 COPY ./migrations /var/www/migrations
 COPY ./price_scraper_nginx /etc/nginx/conf.d/price_scraper_nginx.conf
-COPY ./nginx.conf /etc/nginx/nginx.conf
 
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
@@ -22,7 +21,4 @@ RUN mkdir /var/run/supervisor
 COPY ./supervisord_2.ini /etc/supervisor/conf.d/supervisord_2.ini
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
-WORKDIR /var/www/
-
 CMD ["supervisord"]
-
