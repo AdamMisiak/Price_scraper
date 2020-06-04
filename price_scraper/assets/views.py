@@ -49,8 +49,8 @@ def summary():
     asset = Asset.query.get(user.asset_id)
     names = ['Bitcoin', 'Ripple', "Stellar", 'Gold']
     quantities = [asset.quantity_btc, asset.quantity_xrp, asset.quantity_xlm, asset.quantity_gld]
-    prices = requests.get('http://package:5555')
-    prices = requests.get('http://0.0.0.0:5555')
+    prices = requests.get('http://package')
+    #prices = requests.get('http://0.0.0.0:5555')
     #prices = requests.get('http://127.0.0.1:8000/')
 
     actual_usd = prices.json()["USD"]

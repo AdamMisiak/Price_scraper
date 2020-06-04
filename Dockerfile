@@ -10,7 +10,6 @@ COPY ./price_scraper.ini /var/www/price_scraper.ini
 COPY ./migrations /var/www/migrations
 COPY ./price_scraper_nginx /etc/nginx/conf.d/price_scraper_nginx.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./price_scraper/Makefile /var/www/
 
 RUN pip3 install -r /var/www/requirements.txt
 RUN rm /etc/nginx/conf.d/default.conf
@@ -25,8 +24,5 @@ COPY ./supervisord.conf /etc/supervisor/supervisord.conf
 
 WORKDIR /var/www/
 
-RUN ls -lha /etc/nginx/conf.d/
-
-ENTRYPOINT ["make"]
-CMD ["dockerfile-sed"]
+CMD ["supervisord"]
 
