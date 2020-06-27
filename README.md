@@ -1,4 +1,4 @@
-# Price_scraper
+# Price scraper
 
 [![codecov](https://codecov.io/gh/AdamMisiak/Price_scraper/branch/master/graph/badge.svg)](https://codecov.io/gh/AdamMisiak/Price_scraper)
 
