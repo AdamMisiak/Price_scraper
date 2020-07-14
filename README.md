@@ -1,8 +1,10 @@
-# Price scraper
 
 <p align="center">
 <a href="https://codecov.io/gh/AdamMisiak/Price_scraper"><img src="https://codecov.io/gh/AdamMisiak/Price_scraper/branch/master/graph/badge.svg" /></a>
 </p>
+
+
+# Price scraper
 
 Website presenting actual prices(API) and value of users assets (Btc,Xrp,Gold) created with Flask. App was created as a project in TechLeaders.eu program.
 
