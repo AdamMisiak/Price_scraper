@@ -18,6 +18,10 @@ Website presenting actual prices(API) and value of users assets (Btc,Xrp,Gold) c
 * Python version: 3.7
 
 ## Setup
+To install libraries:
+```
+pip install -r requirements.txt
+```
 To run app locally:
 ```
 docker-compose up --build
