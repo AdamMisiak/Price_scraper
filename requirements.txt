@@ -58,7 +58,7 @@ python-editor==1.0.4
 PyYAML==5.3.1
 query-string==2019.4.13
 request==2019.4.13
-requests==2.22.0
+requests==2.32.4
 responses==0.10.14
 selenium==3.141.0
 six==1.14.0
