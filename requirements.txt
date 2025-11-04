@@ -40,7 +40,7 @@ MarkupSafe==1.1.1
 more-itertools==8.2.0
 multidict==4.7.5
 packaging==20.1
-paramiko==2.7.1
+paramiko==3.4.0
 passlib==1.7.2
 pbr==5.4.5
 pluggy==0.13.1
