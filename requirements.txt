@@ -78,4 +78,4 @@ websocket-client==0.57.0
 Werkzeug==3.0.6
 WTForms==2.2.1
 yarl==1.4.2
-zipp==2.2.0
+zipp==3.19.1
